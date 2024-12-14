@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    errors:
+      models:
+        admin: 
+          attributes:
+            name:
+              blank: "O nome é obrigatório."
+            email:
+              blank: "O e-mail é obrigatório."
+              taken: "Algo deu errado, verifique os dados e tente novamente."
+            password:
+              too_short: "A senha deve ter pelo menos %{count} caracteres."
