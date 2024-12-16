@@ -11,3 +11,9 @@ pt-BR:
               taken: "Algo deu errado, verifique os dados e tente novamente."
             password:
               too_short: "A senha deve ter pelo menos %{count} caracteres."
+        product: 
+          attributes:
+            name:
+              blank: "O nome é obrigatório."
+            email:
+              blank: "O preço é obrigatório."

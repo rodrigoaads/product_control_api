@@ -14,23 +14,22 @@ class BaseController < ApplicationController
       begin 
         decoded = JWT.decode(token, SECRET_KEY, true, algorithm: 'HS256')
         payload = decoded[0]
-
-        if Time.now.to_i > payload['exp']
-          render json: { message: "Sessão expirada, faça login para continuar" }, status: :unauthorized
-        end
         
         decoded
+      rescue JWT::ExpiredSignature => exception
+        exception
       rescue JWT::DecodeError
-        nil  
+        nil
       end  
     end    
   end
 
   def auth_admin
-    token = decode_token
-    return render_unauthorized unless token
+    result = decode_token
+    return render json: { message: "Sessão expirada, faça login para continuar." }, status: :unauthorized if result.is_a?(JWT::ExpiredSignature)
+    return render_unauthorized unless result
 
-    admin_id = token[0]['admin_id']
+    admin_id = result[0]['admin_id']
     @admin = Admin.find_by(id: admin_id)
 
     return render_unauthorized unless @admin
