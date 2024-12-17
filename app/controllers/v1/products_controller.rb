@@ -50,7 +50,18 @@ module V1
     end 
     
     def list
+      products = Product.order(created_at: :desc).paginate(page: params[:page], per_page: params[:per_page])
       
+      render json: {
+        current_page: products.current_page,
+        next_page: products.next_page,
+        previous_page: products.previous_page,
+        total_pages: products.total_pages,
+        total_entries: products.total_entries,
+        products: products.map do |product|
+          product.map_product_list
+        end
+      }, status: :ok
     end  
 
     private 

@@ -15,6 +15,15 @@ class Product < ApplicationRecord
   def formatted_price
     "R$ #{'%.2f' % product_price}"
   end 
+
+  def map_product_list
+    {
+      id: self.id,
+      name: self.name,
+      price: self.formatted_price,
+      quantity: self.quantity
+    }
+  end 
   
   def map_product
     {
