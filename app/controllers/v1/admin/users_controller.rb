@@ -21,7 +21,7 @@ module V1
           token = encode_token({admin_id: @admin.id})
           render json: map_admin(token), status: :accepted
         else   
-          render json: { message: "Usuario ou senha inválidos."}, status: :unauthorized
+          render json: { message: ["Usuario ou senha inválidos."] }, status: :unauthorized
         end  
       end
       
@@ -42,7 +42,7 @@ module V1
 
       def check_login_params
         unless params[:email].present? && params[:password].present?
-          return render json: { message: "Email e senha são obrigatórios."}, status: :bad_request
+          return render json: { message: ["Email e senha são obrigatórios."] }, status: :bad_request
         end  
       end  
 

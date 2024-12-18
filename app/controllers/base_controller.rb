@@ -26,7 +26,7 @@ class BaseController < ApplicationController
 
   def auth_admin
     result = decode_token
-    return render json: { message: "Sessão expirada, faça login para continuar." }, status: :unauthorized if result.is_a?(JWT::ExpiredSignature)
+    return render json: { message: ["Sessão expirada, faça login para continuar."] }, status: :unauthorized if result.is_a?(JWT::ExpiredSignature)
     return render_unauthorized unless result
 
     admin_id = result[0]['admin_id']
@@ -38,6 +38,6 @@ class BaseController < ApplicationController
   private
 
   def render_unauthorized
-    render json: { message: "Faça seu login antes de continuar."}, status: :unauthorized
+    render json: { message: ["Faça seu login antes de continuar."] }, status: :unauthorized
   end  
 end

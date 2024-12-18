@@ -13,7 +13,7 @@ module V1
       begin
         product.product_price = params[:price]
       rescue
-        return render json: { message: "Verifique se o preço é válido, e tente novamente." }, status: :unprocessable_entity
+        return render json: { message: ["Verifique se o preço é válido, e tente novamente."] }, status: :unprocessable_entity
       end  
       
       if product.save
@@ -43,9 +43,9 @@ module V1
     
     def remove 
       if @product.destroy
-        render json: { message: "Produto removido com sucesso." }, status: :ok
+        render json: { message: ["Produto removido com sucesso."] }, status: :ok
       else
-        render json: { message: "Algo deu errado, tente novamente." }, status: :unprocessable_entity
+        render json: { message: ["Algo deu errado, tente novamente."] }, status: :unprocessable_entity
       end  
     end 
     
@@ -69,7 +69,7 @@ module V1
     def get_product
       @product = Product.find_by(id: params[:id])
 
-      return render json: { message: "Nenhum produto encontrado." }, status: :not_found unless @product
+      return render json: { message: ["Nenhum produto encontrado."] }, status: :not_found unless @product
     end  
  
   end    
